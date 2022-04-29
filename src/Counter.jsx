@@ -1,22 +1,26 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { decrement, increment } from './redux/ducks/counter';
 
 export default function Counter() {
-	const [count, setCount] = useState(0);
+	//use selector é um hook do react-redux que usamos para selecionar o estado. conseguimos pegar dentro de state.NOME DO REDUCER.NOME DO ESTADO
 
-	const increment = () => {
-		setCount(count + 1);
+	//hook para usar o dispatch que dispara o reducer
+	const dispatch = useDispatch();
+
+	const handleIncrement = () => {
+		dispatch(increment());
 	};
 
-	const decrement = () => {
-		setCount(count - 1);
+	const handleDecrement = () => {
+		dispatch(decrement());
 	};
 
 	return (
 		<div style={{ backgroundColor: 'grey', margin: '10px' }}>
-			<h3>{`Count: ${count}`}</h3>
 			<div style={{ display: 'flex', justifyContent: 'center' }}>
-				<button onClick={increment}>Increment</button>
-				<button onClick={decrement}>Decrement</button>
+				<button onClick={handleIncrement}>Increment</button>
+				<button onClick={handleDecrement}>Decrement</button>
 			</div>
 		</div>
 	);
